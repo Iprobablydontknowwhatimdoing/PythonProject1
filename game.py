@@ -63,7 +63,7 @@ class Graysoul:
     @staticmethod
     def describe_outside_safehouse():
         print("You find yourself on an old grimy ally, which you follow to the main road leading into the city. You know that\n"
-              "if you continue along this path you'll eventually get to the nick where Gurathen is being held. Are you ready to\n"
+              "if you continue along this path you'll eventually get to the jailhouse where Gurathen is being held. Are you ready to\n"
               "try to get him out?")
         if discoveredOptions['guard change']:
             decision = decide(['follow path', 'wait until shift change','go back'],False)
@@ -76,7 +76,7 @@ class Graysoul:
                           "beneath you, nearly but not quite covering the clattering of the planks of wood that make up the \n"
                           "bridge. The spray brings welcome releaf from both the stuffy summer night and the rancid oder that \n"
                           "seems to fill nearly all cities.")
-                    Graysoul.describe_nick(False)
+                    Graysoul.describe_jailhouse(False)
                 case 1:
                     print("You decide to wait until the guard changes shift. How do you want to do that?")
                     time_decision = decide(['walk in the park','watch the river','buy some food'], True)
@@ -89,7 +89,7 @@ class Graysoul:
                                   "despite this, it offered a respite from the city that you much appreciate, and offers \n"
                                   "city-dwellers a place to think where they could pretend to be somewhere else. The time \n"
                                   "passes quickly, and before you know it, the guard is about to change.")
-                            Graysoul.describe_nick(True)
+                            Graysoul.describe_jailhouse(True)
                         case 1:
                             print("You decide to sit and watch the river. The bubbling of the river brings back memories of \n"
                                   "playing on the farm where you grew up. As you swing your legs over the edge to hopefully catch \n"
@@ -97,11 +97,11 @@ class Graysoul:
                                   "be a kid again, or at least to have a choice in what you are. it isn't long before the guard \n"
                                   "is about to change, and you get up from the bridge as guards shuffle with their lantern held \n"
                                   "out to ward against the dark, and follow them.")
-                            Graysoul.describe_nick(True)
+                            Graysoul.describe_jailhouse(True)
                         case 2:
                             print("You walk where no man has walked before. This path hasn't been implemented yet")
                             print("It's time for you to make your friend escape.")
-                            Graysoul.describe_nick(True)
+                            Graysoul.describe_jailhouse(True)
                 case 2:
                     print("You return to the smugglers' den.")
                     SmugglersHideout.describe_main_room()
@@ -117,18 +117,18 @@ class Graysoul:
                         "beneath you, nearly but not quite covering the clattering of the planks of wood that make up the \n"
                         "bridge. The spray brings welcome releaf from both the stuffy summer night and the rancid oder that \n"
                         "seems to fill nearly all cities.")
-                    Graysoul.describe_nick(False)
+                    Graysoul.describe_jailhouse(False)
                 case 1:
                     print("You return to the smugglers' den.")
                     SmugglersHideout.describe_main_room()
 
     @staticmethod
-    def describe_nick(waited_shift: bool):
-        print("The nick is surprisingly small; it doesn't even have a second floor. It doesn't have to, you suppose, \n"
+    def describe_jailhouse(waited_shift: bool):
+        print("The jailhouse is surprisingly small; it doesn't even have a second floor. It doesn't have to, you suppose, \n"
               "when execution is the punishment for every, even minor, infraction. It also makes your job harder.")
         if waited_shift:
             print("As you approach the guardhouse, sneaking just ahead of the shift change guards, you see the \n"
-                  "flickering lights of the nick, coming from a group inside who huddle around a table playing a game \n"
+                  "flickering lights of the jailhouse, coming from a group inside who huddle around a table playing a game \n"
                   "of cards. They don't have a straight view of the holding cells, and you think if you hadn't waited until the \n"
                   "shift, they might patrol the cells and catch you. You see a back door that you could sneak through, and avoid \n"
                   "the guards at the front door. You'll have to be quick though; If you don't hurry, then the guards in the \n"
@@ -144,7 +144,7 @@ class Graysoul:
                         case 0:
                             print("You bring the key imprint device to the lock, and mold it to the inside of the lock. \n"
                                   "After five minutes of waiting, you can turn the key and successfully turn the door.\n")
-                            Graysoul.describe_inside_nick()
+                            Graysoul.describe_inside_jailhouse()
                             print("You kneel to unlock the cell door. You already used your key imprint device on the back door, so here \n"
                                   "you get out your lock picks. With a little time and difficulty, you manage to unlock the door. But just as \n"
                                   "you start to usher Gurathen out (with a finger on your lips for silence), three of the shift change guards \n"
@@ -154,8 +154,8 @@ class Graysoul:
                             failure_condition()
                         case 1:
                             print("You get out your lock picks, and smoothly pick the lock. You have enough experience practicing on this model \n"
-                                  "it barely takes any time at all, and you slide the door open to enter the nick.")
-                            Graysoul.describe_inside_nick()
+                                  "it barely takes any time at all, and you slide the door open to enter the jailhouse.")
+                            Graysoul.describe_inside_jailhouse()
                             print("After you tell Gurathen to be quite with a finger to your lips, you kneel down to unlock his cell. You don't \n"
                                   "have as much experience with this lock,  so it would take longer than the key imprint device, but mercifully, this \n"
                                   "lock is relatively rustless. You think you could pretty easily open it, as though you haven't practiced particularly \n"
@@ -193,7 +193,7 @@ class Graysoul:
                                                     print("You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
                                                           "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
                                                           "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
-                                                          "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                                          "and bringing you all to the jailhouse. In the rush, you are separated from Gurathen and can't tell if he escaped.")
                                                     failure_condition()
                                         if discoveredOptions['dagger']:
                                             decision =  decide(['attack','run'],False)
@@ -209,7 +209,7 @@ class Graysoul:
                                                         "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
                                                         "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
                                                         "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
-                                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                                        "and bringing you all to the jailhouse. In the rush, you are separated from Gurathen and can't tell if he escaped.")
                                                     failure_condition()
                                         if discoveredOptions['club']:
                                             decision = decide(['attack', 'run'], False)
@@ -225,20 +225,20 @@ class Graysoul:
                                                         "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
                                                         "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
                                                         "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
-                                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                                        "and bringing you all to the jailhouse. In the rush, you are separated from Gurathen and can't tell if he escaped.")
                                                     failure_condition()
                                         else:
                                             print(
                                                 "You try to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
                                                 "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
                                                 "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
-                                                "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                                "and bringing you all to the jailhouse. In the rush, you are separated from Gurathen and can't tell if he escaped.")
                                             failure_condition()
                 if discoveredOptions['lock picks']:
                     print(
                         "You get out your lock picks, and smoothly pick the lock. You have enough experience practicing on this model \n"
-                        "it barely takes any time at all, and you slide the door open to enter the nick.")
-                    Graysoul.describe_inside_nick()
+                        "it barely takes any time at all, and you slide the door open to enter the jailhouse.")
+                    Graysoul.describe_inside_jailhouse()
                     print(
                         "After you tell Gurathen to be quite with a finger to your lips, you kneel down to unlock his cell. You don't \n"
                         "have as much experience with this lock,  so it would take longer than the key imprint device, but mercifully, this \n"
@@ -273,7 +273,7 @@ class Graysoul:
                                         "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
                                         "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
                                         "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
-                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                        "and bringing you all to the jailhouse. In the rush, you are separated from Gurathen and can't tell if he escaped.")
                                     failure_condition()
                         if discoveredOptions['dagger']:
                             decision = decide(['attack', 'run'], False)
@@ -289,7 +289,7 @@ class Graysoul:
                                         "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
                                         "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
                                         "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
-                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                        "and bringing you all to the jailhouse. In the rush, you are separated from Gurathen and can't tell if he escaped.")
                                     failure_condition()
                         if discoveredOptions['club']:
                             decision = decide(['attack', 'run'], False)
@@ -305,31 +305,31 @@ class Graysoul:
                                         "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
                                         "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
                                         "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
-                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                        "and bringing you all to the jailhouse. In the rush, you are separated from Gurathen and can't tell if he escaped.")
                                     failure_condition()
                         else:
                             print(
                                 "You try to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
                                 "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
                                 "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
-                                "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                "and bringing you all to the jailhouse. In the rush, you are separated from Gurathen and can't tell if he escaped.")
                             failure_condition()
         else:
-            print("As you approach the guardhouse you see the flickering lights of the nick, coming from a group inside \n"
+            print("As you approach the guardhouse you see the flickering lights of the jailhouse, coming from a group inside \n"
                   "who huddle around a table playing a game of cards. They don't have a straight view of the holding cells. \n"
                   "You see a back door that you could sneak through, and avoid the guards at the front door. You'll have \n"
                   "to be quick though; If you don't hurry, then the guards will throw you in too, so you hurry to the back. \n"
                   "You approach the door, under which a feint warm light streams out. When you try to turn the handle, though, \n"
                   "it doesn't budge; the door is locked. And just as you're doing that, a guard circles around the building. \n"
-                  "He calls out that someone is trying to get into the nick, and more guards come rushing towards you. You manage \n"
+                  "He calls out that someone is trying to get into the jailhouse, and more guards come rushing towards you. You manage \n"
                   "to run away, but the guards are on high alert the rest of the night, and you don't get another opportunity to \n"
                   "free Gurathen. The next morning he is executed in the park. You can see the pain in your friend's eyes as \n"
                   "he struggles for breath as he is hanged")
             failure_condition()
 
     @staticmethod
-    def describe_inside_nick():
-        print("The inside of the nick has grime and dust caching nearly every surface, making it hard to breath. The \n"
+    def describe_inside_jailhouse():
+        print("The inside of the jailhouse has grime and dust caching nearly every surface, making it hard to breath. The \n"
               "odor of unwashed bodies wafts into your nostrils, though there are only two people in here at the moment \n"
               "There are two hallways, each with ten cells (five on each side). From the rust on most of the locks, it \n"
               "looks like they rarely get visitors. The laughter of the guardsmen drifts in from the cracked door of the \n"
@@ -372,7 +372,7 @@ class SmugglersHideout:
             print(
                 "The map is worn on the edges, and has quite a few stains, but is still readable. It shows the city in excruciatingly \n"
                 "little detail, but on it are marked a plethora of red loops, and the annotations on the map describe them \n"
-                "as routs for police and guards. One in particular catches your eye: a guard change over the nick where Gurathen\n"
+                "as routs for police and guards. One in particular catches your eye: a guard change over the jailhouse where Gurathen\n"
                 "is being kept. The guards will change at 11pm, maybe then would be a good time to sneak in.")
             discoveredOptions['guard change'] = True
             SmugglersHideout.describe_main_room()
