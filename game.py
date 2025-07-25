@@ -1,5 +1,5 @@
 from typing import List, Optional
-
+# You walk where no man has walked before. This path hasn't been implemented yet
 
 def show_options(option_list: List[str]):
     for string in option_list:
@@ -22,8 +22,41 @@ def decide(decisions: List[str], show_by_default: Optional[bool]):
 
 discoveredOptions: dict[str, bool] = {'guard change': False, 'club': False, 'dagger': False, 'lock picks': False,
                                       'key wax': False, 'cards': False}
+def failure_condition():
+    print("You walk where no man has walked before. This path hasn't been implemented yet")
+    print("Regardless, you lost, so this is where your story ends. Better luck next time.")
+    decision = decide(['retry','quit'],True)
+    match decision:
+        case 0:
+            discoveredOptions['guard change'] = False
+            discoveredOptions['club'] = False
+            discoveredOptions['dagger'] = False
+            discoveredOptions['lock picks'] = False
+            discoveredOptions['key wax'] = False
+            discoveredOptions['cards'] = False
+            print("\nThis is your second life! don't waste it.\n\n")
+            SmugglersHideout.describe_main_room()
+        case 1:
+            print("\nO.K. Goodbye. Hope you had fun!")
+def victory_condition():
+    print("You walk where no man has walked before. This path hasn't been implemented yet")
+    print("Even though I haven't fleshed out this part, Congradulations! You beat the game! How does it feel?")
+    print("Do you want to try again?")
+    decision = decide(['play again','quit'],True)
+    match decision:
+        case 0:
+            discoveredOptions['guard change'] = False
+            discoveredOptions['club'] = False
+            discoveredOptions['dagger'] = False
+            discoveredOptions['lock picks'] = False
+            discoveredOptions['key wax'] = False
+            discoveredOptions['cards'] = False
+            print("\nHave fun on your second run!\n\n")
+            SmugglersHideout.describe_main_room()
+        case 1:
+            print("Hope you had fun, and congratulations again!")
 
-
+    SmugglersHideout.describe_main_room()
 class Graysoul:
     @staticmethod
     def describe_outside_safehouse():
@@ -41,7 +74,7 @@ class Graysoul:
                           "beneath you, nearly but not quite covering the clattering of the planks of wood that make up the \n"
                           "bridge. The spray brings welcome releaf from both the stuffy summer night and the rancid oder that \n"
                           "seems to fill nearly all cities.")
-                    Graysoul.describe_nick()
+                    Graysoul.describe_nick(False)
                 case 1:
                     print("You decide to wait until the guard changes shift. How do you want to do that?")
                     time_decision = decide(['walk in the park','watch the river','buy some food'], True)
@@ -54,7 +87,7 @@ class Graysoul:
                                   "despite this, it offered a respite from the city that you much appreciate, and offers \n"
                                   "city-dwellers a place to think where they could pretend to be somewhere else. The time \n"
                                   "passes quickly, and before you know it, the guard is about to change.")
-                            Graysoul.describe_nick()
+                            Graysoul.describe_nick(True)
                         case 1:
                             print("You decide to sit and watch the river. The bubbling of the river brings back memories of \n"
                                   "playing on the farm where you grew up. As you swing your legs over the edge to hopefully catch \n"
@@ -62,11 +95,11 @@ class Graysoul:
                                   "be a kid again, or at least to have a choice in what you are. it isn't long before the guard \n"
                                   "is about to change, and you get up from the bridge as guards shuffle with their lantern held \n"
                                   "out to ward against the dark, and follow them.")
-                            Graysoul.describe_nick()
+                            Graysoul.describe_nick(True)
                         case 2:
                             print("You walk where no man has walked before. This path hasn't been implemented yet")
                             print("It's time for you to make your friend escape.")
-                            Graysoul.describe_nick()
+                            Graysoul.describe_nick(True)
                 case 2:
                     print("You return to the smugglers' den.")
                     SmugglersHideout.describe_main_room()
@@ -82,15 +115,18 @@ class Graysoul:
                         "beneath you, nearly but not quite covering the clattering of the planks of wood that make up the \n"
                         "bridge. The spray brings welcome releaf from both the stuffy summer night and the rancid oder that \n"
                         "seems to fill nearly all cities.")
-                    Graysoul.describe_nick()
+                    Graysoul.describe_nick(False)
                 case 1:
                     print("You return to the smugglers' den.")
                     SmugglersHideout.describe_main_room()
 
     @staticmethod
-    def describe_nick():
-        print("You walk where no man has walked before. This path hasn't been implemented yet")
-        Graysoul.describe_outside_safehouse()
+    def describe_nick(waited_shift: bool):
+        print("The nick is surprisingly small; it doesn't even have a second floor. It doesn't have to, you suppose, \n"
+              "when execution is the punishment for every, even minor, infraction. It also makes your hob harder.")
+        if waited_shift:
+            print("As you approach the guardhouse,")
+
 
 
 class SmugglersHideout:
