@@ -2,8 +2,10 @@ from typing import List, Optional
 # You walk where no man has walked before. This path hasn't been implemented yet
 
 def show_options(option_list: List[str]):
+    i = 0
     for string in option_list:
-        print(f' - {string}')
+        print(f' {i}. {string}')
+        i += 1
 
 
 def decide(decisions: List[str], show_by_default: Optional[bool]):
