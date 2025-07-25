@@ -25,10 +25,9 @@ def decide(decisions: List[str], show_by_default: Optional[bool]):
 
 
 discoveredOptions: dict[str, bool] = {'guard change': False, 'club': False, 'dagger': False, 'lock picks': False,
-                                      'key wax': False, 'cards': False}
+                                      'key wax': False, 'cards': False, 'lamp': False}
 def failure_condition():
-    print("You walk where no man has walked before. This path hasn't been implemented yet")
-    print("Regardless, you lost, so this is where your story ends. Better luck next time.")
+    print("Regardless of how you did it, you lost, so this is where your story ends. Better luck next time.")
     decision = decide(['retry','quit'],True)
     match decision:
         case 0:
@@ -38,6 +37,7 @@ def failure_condition():
             discoveredOptions['lock picks'] = False
             discoveredOptions['key wax'] = False
             discoveredOptions['cards'] = False
+            discoveredOptions['lamp'] = False
             print("\nThis is your second life! don't waste it.\n\n")
             SmugglersHideout.describe_main_room()
         case 1:
@@ -55,6 +55,7 @@ def victory_condition(): #TODO: turn off lamp option
             discoveredOptions['lock picks'] = False
             discoveredOptions['key wax'] = False
             discoveredOptions['cards'] = False
+            discoveredOptions['lamp'] = False
             print("\nHave fun on your second run!\n\n")
             SmugglersHideout.describe_main_room()
         case 1:
@@ -113,7 +114,7 @@ class Graysoul:
                         "You continue along the path, paved with cobblestones. You can feel the beating of your heart as \n"
                         "people pass by you, but noone seems to think anything is out of the ordinary. It's been a while \n"
                         "since you walked these streets, and the cobblestones feel rough and hard against your worn-down shoes\n"
-                        "compared to the dirt you normalley walk on. You reach the bridge, and as you walk over it the water rushes \n"
+                        "compared to the dirt you normally walk on. You reach the bridge, and as you walk over it the water rushes \n"
                         "beneath you, nearly but not quite covering the clattering of the planks of wood that make up the \n"
                         "bridge. The spray brings welcome releaf from both the stuffy summer night and the rancid oder that \n"
                         "seems to fill nearly all cities.")
@@ -552,26 +553,116 @@ class SmugglersHideout:
 
     @staticmethod
     def describe_bunk_room():
-        print("Three sets of bunk beds line the room, upon which yellowed mattresses are lain. Ratty quilts cover these, \n"
-              "but only two of them have pillows. In the middle of the room, on a short table, an old deck of cards sits, \n"
-              "which they play most nights. An oil lamp flickers on the table, but you quickly put it out; It's not good to \n"
-              "waste oil with the prices they're charging these days. You will have to figure out who left it on once you free \n"
-              "Gurathen")
-        decision = decide(['go to bed', 'take cards', 'go back'],False)
-        match decision:
-            case 0:
-                print("You reach your bunk, but aren't tired. You try to get to sleep anyway; the meager light coming under\n"
-                      "the door keeps you up. You are unable to go to sleep, despite your best efforts. It's been nearly an hour.")
-                SmugglersHideout.describe_bunk_room()
-            case 1:
-                if discoveredOptions['cards']:
-                    print("You've already taken the cards; they are no longer on the table. You only *have* one pair of cards.")
-                else:
-                    print("You slip the cards into your pocket; it's always good to have a deck of cards. Just hope the others \n"
-                      "don't find out")
-                    discoveredOptions['cards'] = True
-                SmugglersHideout.describe_bunk_room()
-            case 2:
-                SmugglersHideout.describe_back_hall()
+        if discoveredOptions['lamp'] and discoveredOptions['cards']:
+            print(
+                "Thought the room is quite dark, you can still make out the outline of three sets of bunks lining the room.\n"
+                "In the middle of the room, on a short table, where your box of cards used to be. A dark oil lamp sits on\n"
+                "the table; it's not good to waste oil with the prices they're charging these days. Other than that,\n"
+                "the room is pretty barren\n")
+            decision = decide(['go to bed', 'leave cards', 'turn on lamp' 'go back'], False)
+            match decision:
+                case 0:
+                    print(
+                        "You reach your bunk, but aren't tired. You try to get to sleep anyway; the meager light coming under\n"
+                        "the door keeps you up. You are unable to go to sleep, despite your best efforts. It's been nearly an hour.")
+                    SmugglersHideout.describe_bunk_room()
+                case 1:
+                    print(
+                        "You slip the cards back on the table; you don't want the others to find out")
+                    discoveredOptions['cards'] = False
+                    SmugglersHideout.describe_bunk_room()
+                case 2:
+                    print("The oil lamp flickers to life, but you feel weird leaving it on and wasting oil when you aren't using it\n")
+                    discoveredOptions['lamp'] = False
+                    SmugglersHideout.describe_bunk_room()
+                case 3:
+                    SmugglersHideout.describe_back_hall()
+        elif discoveredOptions['lamp'] and not discoveredOptions['cards']:
+            print(
+                "Thought the room is quite dark, you can still make out the outline of three sets of bunks lining the room."
+                "In the middle of the room, on a short table, is a small box, which as your eyes adjust to the darkness, resolves \n"
+                "into the deck of cards which you play most nights. A dark oil lamp sits on the table; it's not good to \n"
+                "waste oil with the prices they're charging these days.  Other than that, the room is pretty barren\n")
+            decision = decide(['go to bed', 'take cards', 'turn off lamp' 'go back'], False)
+            match decision:
+                case 0:
+                    print(
+                        "You reach your bunk, but aren't tired. You try to get to sleep anyway; the meager light coming under\n"
+                        "the door keeps you up. You are unable to go to sleep, despite your best efforts. It's been nearly an hour.")
+                    SmugglersHideout.describe_bunk_room()
+                case 1:
+                    if discoveredOptions['cards']:
+                        print(
+                            "You've already taken the cards; they are no longer on the table. You only *have* one pair of cards.")
+                    else:
+                        print(
+                            "You slip the cards into your pocket; it's always good to have a deck of cards. Just hope the others \n"
+                            "don't find out")
+                        discoveredOptions['cards'] = True
+                    SmugglersHideout.describe_bunk_room()
+                case 2:
+                    print("The oil lamp flickers to life, but you feel weird leaving it on and wasting oil when you aren't using it\n")
+                    discoveredOptions['lamp'] = False
+                    SmugglersHideout.describe_bunk_room()
+                case 3:
+                    SmugglersHideout.describe_back_hall()
+        elif discoveredOptions['cards'] and not discoveredOptions['lamp']:
+            print("Three sets of bunk beds line the room, upon which yellowed mattresses are lain. Ratty quilts cover these, \n"
+                  "but only two of them have pillows. In the middle of the room there is a short table where a deck of cards used \n"
+                  "to be which you play most nights. An oil lamp flickers on the table, giving off light, but you should turn it off; \n"
+                  "it's not a good idea to waste oil with the prices they're charging these days. You will have to figure out who \n"
+                  "left it on once you free Gurathen")
+            decision = decide(['go to bed', 'leave cards', 'turn off lamp' 'go back'], False)
+            match decision:
+                case 0:
+                    print(
+                        "You reach your bunk, but aren't tired. You try to get to sleep anyway; the meager light coming under\n"
+                        "the door keeps you up. You are unable to go to sleep, despite your best efforts. It's been nearly an hour.")
+                    SmugglersHideout.describe_bunk_room()
+                case 1:
+                    if discoveredOptions['cards']:
+                        print(
+                            "You've already taken the cards; they are no longer on the table. You only *have* one pair of cards.")
+                    else:
+                        print(
+                            "You slip the cards back on the table; you don't want the others to find out")
+                        discoveredOptions['cards'] = False
+                    SmugglersHideout.describe_bunk_room()
+                case 2:
+                    print(
+                        "You turn off the old lamp, and the room is now a lot darker, but at least you aren't wasting oil.\n"
+                        "You can still see a little by the light coming from the hall")
+                    discoveredOptions['lamp'] = True
+                    SmugglersHideout.describe_bunk_room()
+                case 3:
+                    SmugglersHideout.describe_back_hall()
+        elif not discoveredOptions['cards'] and not discoveredOptions['lamp']:
+            print(
+                "Three sets of bunk beds line the room, upon which yellowed mattresses are lain. Ratty quilts cover these, \n"
+                "but only two of them have pillows. In the middle of the room, on a short table, an old deck of cards sits, \n"
+                "which they play most nights. An oil lamp flickers on the table, giving off light, but you should turn it off; \n"
+                "it's not a good idea to waste oil with the prices they're charging these days. You will have to figure out who \n"
+                "left it on once you free Gurathen")
+            decision = decide(['go to bed', 'take cards', 'turn off lamp' 'go back'],False)
+            match decision:
+                case 0:
+                    print("You reach your bunk, but aren't tired. You try to get to sleep anyway; the meager light coming under\n"
+                          "the door keeps you up. You are unable to go to sleep, despite your best efforts. It's been nearly an hour.")
+                    SmugglersHideout.describe_bunk_room()
+                case 1:
+                    if discoveredOptions['cards']:
+                        print("You've already taken the cards; they are no longer on the table. You only *have* one pair of cards.")
+                    else:
+                        print("You slip the cards into your pocket; it's always good to have a deck of cards. Just hope the others \n"
+                          "don't find out")
+                        discoveredOptions['cards'] = True
+                    SmugglersHideout.describe_bunk_room()
+                case 2:
+                    print("You turn off the old lamp, and the room is now a lot darker, but at least you aren't wasting oil.\n"
+                          "You can still see a little by the light coming from the hall")
+                    discoveredOptions['lamp'] = True
+                    SmugglersHideout.describe_bunk_room()
+                case 3:
+                    SmugglersHideout.describe_back_hall()
 if __name__ == "__main__":
     SmugglersHideout.describe_main_room()
