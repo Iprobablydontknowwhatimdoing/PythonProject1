@@ -1,3 +1,4 @@
+from getpass import fallback_getpass
 from typing import List, Optional
 # You walk where no man has walked before. This path hasn't been implemented yet
 
@@ -125,8 +126,70 @@ class Graysoul:
         print("The nick is surprisingly small; it doesn't even have a second floor. It doesn't have to, you suppose, \n"
               "when execution is the punishment for every, even minor, infraction. It also makes your job harder.")
         if waited_shift:
-            print("As you approach the guardhouse,")
+            print("As you approach the guardhouse, sneaking just ahead of the shift change guards, you see the \n"
+                  "flickering lights of the nick, coming from a group inside who huddle around a table playing a game \n"
+                  "of cards. They don't have a straight view of the holding cells, and you think if you hadn't waited until the \n"
+                  "shift, they might patrol the cells and catch you. You see a back door that you could sneak through, and avoid \n"
+                  "the guards at the front door. You'll have to be quick though; If you don't hurry, then the guards in the \n"
+                  "next shift will catch you. So you hurry to the back. You approach the door, under which a feint warm light \n"
+                  "streams out. When you try to turn the handle, though, it doesn't budge; the door is locked.")
+            if discoveredOptions['key wax'] or discoveredOptions['lock picks']:
+                if discoveredOptions['key wax'] and discoveredOptions['lock picks']:
+                    print("You have two ways of opening this lock. You know the key imprint device will work, but if you use that, then \n"
+                          "it may take too long. You are good with lock picks, but if you can't get the lock open, it will definitely\n"
+                          "take too long. You think you recognize the lock though, and it's one you have good experience with.")
+                    decision = decide(['use key imprint device', 'use lock picks'], False)
+                    match decision:
+                        case 0:
+                            print("You bring the key imprint device to the lock, and mold it to the inside of the lock. \n"
+                                  "After five minutes of waiting, you can turn the key and successfully turn the door.\n")
+                            Graysoul.describe_inside_nick()
+                            print("You kneel to unlock the cell door. You already used your key imprint device on the back door, so here \n"
+                                  "you get out your lock picks. With a little time and difficulty, you manage to unlock the door. But just as \n"
+                                  "you start to usher Gurathen out (with a finger on your lips for silence), three of the shift change guards \n"
+                                  "burst from the door and capture you, pushing you to the ground, and bind you. Gurathen is shoved back in \n"
+                                  "his cell, and you are put in a cell opposite his. He cries out, but is quickly silenced by the guards, and \n"
+                                  "both of you are gagged with a gruff 'Can't have you talking to each other' from one of the guards.")
+                            failure_condition()
+                        case 1:
+                            print("You get out your lock picks, and smoothly pick the lock. You have enough experience practicing on this model \n"
+                                  "it barely takes any time at all, and you slide the door open to enter the nick.")
+                            Graysoul.describe_inside_nick()
+                            print("After you tell Gurathen to be quite with a finger to your lips, you kneel down to unlock his cell. You don't \n"
+                                  "have as much experience with this lock,  so it would take longer than the key imprint device, but mercifully, this \n"
+                                  "lock is relatively rustless. You think you could pretty easily open it, as though you haven't practiced particularly \n"
+                                  "on this model, it is a much lest robust lock, as it seems the guards were relying on themselves being there to catch \n"
+                                  "intruders.")
+                            failure_condition()
+                            decision = decide(['use key imprint device','use lock picks','bust door open'], False)
+                            match decision:
+                                case 0:
+                                    print("You get the key imprint device and set it into the lock and let it set. But as you turn it, \n"
+                                          "the guards open the door and see you. You took too long letting the key set, and they see you \n"
+                                          "at the cell door. They rush to surround you, and put you inside a cell opposite Gurathen's. \n"
+                                          "They bind you with ropes, take everything you have on you, and lock the door.")
+                                    failure_condition()
+                                case 1:
+                                    print("Your lock picks slide into place, and click the cell door opens. You gesture for Gurathen to \n"
+                                          "leave the cell, and hurry to the back door. After you leave, though, you see a guard coming \n"
+                                          "around the building, presumably on a normal circuit. As he rounds the building, he sees you.")
+                                    if discoveredOptions['dagger'] or discoveredOptions['club']:
+                                        if discoveredOptions['dagger'] and discoveredOptions['club']:
+                                            print("but before he attacks you, you have a split second to act. You could attack him with both daggers")
 
+    @staticmethod
+    def run_from_guards():
+        failure_condition()
+    @staticmethod
+    def describe_inside_nick():
+        print("The inside of the nick has grime and dust caching nearly every surface, making it hard to breath. The \n"
+              "odor of unwashed bodies wafts into your nostrils, though there are only two people in here at the moment \n"
+              "There are two hallways, each with ten cells (five on each side). From the rust on most of the locks, it \n"
+              "looks like they rarely get visitors. The laughter of the guardsmen drifts in from the cracked door of the \n"
+              "guard room. The guard change will be here soon and take up their attention for a while longer, but it's\n"
+              "good to get a move on now. You pass the unused cells, each with a wooden bucket and a bed frame, though no \n"
+              "mattresses adorn them. Eventually you reach the cell Gurathen is being kept in; No less dirty, but at \n"
+              "least the locks were kept less rusty due to more frequent use. Less carries a lot of weight in that sentence. \n")
 
 
 class SmugglersHideout:
