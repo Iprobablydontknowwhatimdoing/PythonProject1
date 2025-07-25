@@ -1,9 +1,8 @@
-from getpass import fallback_getpass
 from typing import List, Optional
 # You walk where no man has walked before. This path hasn't been implemented yet
 
 def show_options(option_list: List[str]):
-    i = 0
+    i = 1
     for string in option_list:
         print(f' {i}. {string}')
         i += 1
@@ -18,6 +17,8 @@ def decide(decisions: List[str], show_by_default: Optional[bool]):
         return decide(decisions, False)
     elif answer.lower().strip() in decisions:
         return decisions.index(answer.lower().strip())
+    elif ord(answer.lower().strip()[0]) == ord('1') or ord(answer.lower().strip()[0]) == ord('2') or ord(answer.lower().strip()[0]) == ord('3') or ord(answer.lower().strip()[0]) == ord('4') or ord(answer.lower().strip()[0]) == ord('5') or ord(answer.lower().strip()[0]) == ord('6') or ord(answer.lower().strip()[0]) == ord('7') or ord(answer.lower().strip()[0]) == ord('8') or ord(answer.lower().strip()[0]) == ord('9'):
+        return int(answer.lower().strip()[0]) - 1
     else:
         print('Sorry, I didn\'t catch that, please try again')
         return decide(decisions, False)
