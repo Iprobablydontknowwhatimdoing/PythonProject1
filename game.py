@@ -40,7 +40,7 @@ def failure_condition():
             print("\nO.K. Goodbye. Hope you had fun!")
 def victory_condition():
     print("You walk where no man has walked before. This path hasn't been implemented yet")
-    print("Even though I haven't fleshed out this part, Congradulations! You beat the game! How does it feel?")
+    print("Even though I haven't fleshed out this part, Congratulations! You beat the game! How does it feel?")
     print("Do you want to try again?")
     decision = decide(['play again','quit'],True)
     match decision:
