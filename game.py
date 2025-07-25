@@ -1,23 +1,22 @@
-from pydoc import describe
 from typing import List, Optional
 
 
 def show_options(option_list: List[str]):
     for string in option_list:
-        print(f" - {string}")
+        print(f' - {string}')
 
 
 def decide(decisions: List[str], show_by_default: Optional[bool]):
     if show_by_default:
         show_options(decisions)
-    answer = input("What do you want to do? (you can always say 'hint') > ")
+    answer = input('What do you want to do? (you can always say \'hint\') > ')
     if answer.lower().strip() == "hint":
         show_options(decisions)
         return decide(decisions, False)
     elif answer.lower().strip() in decisions:
         return decisions.index(answer.lower().strip())
     else:
-        print("Sorry, I didn't catch that, please try again")
+        print('Sorry, I didn\'t catch that, please try again')
         return decide(decisions, False)
 
 
@@ -45,7 +44,48 @@ class Graysoul:
                     Graysoul.describe_nick()
                 case 1:
                     print("You decide to wait until the guard changes shift. How do you want to do that?")
-                    decide(['walk in the park','watch the river'])
+                    time_decision = decide(['walk in the park','watch the river','buy some food'], True)
+                    match time_decision:
+                        case 0:
+                            print("You decide to walk for a while in the park, which is one of the few parks in a city in \n"
+                                  "the entire empire, which was part of the reason you decided to move here (not that you \n"
+                                  "make much use of it now). Calling it a park would be a bit generous, it was more the size of a \n"
+                                  "large community garden and a small clearing, and contained about as much vegetation. But \n"
+                                  "despite this, it offered a respite from the city that you much appreciate, and offers \n"
+                                  "city-dwellers a place to think where they could pretend to be somewhere else. The time \n"
+                                  "passes quickly, and before you know it, the guard is about to change.")
+                            Graysoul.describe_nick()
+                        case 1:
+                            print("You decide to sit and watch the river. The bubbling of the river brings back memories of \n"
+                                  "playing on the farm where you grew up. As you swing your legs over the edge to hopefully catch \n"
+                                  "some cool spray, you think of how you spent your life and of your childhood. You long to \n"
+                                  "be a kid again, or at least to have a choice in what you are. it isn't long before the guard \n"
+                                  "is about to change, and you get up from the bridge as guards shuffle with their lantern held \n"
+                                  "out to ward against the dark, and follow them.")
+                            Graysoul.describe_nick()
+                        case 2:
+                            print("You walk where no man has walked before. This path hasn't been implemented yet")
+                            print("It's time for you to make your friend escape.")
+                            Graysoul.describe_nick()
+                case 2:
+                    print("You return to the smugglers' den.")
+                    SmugglersHideout.describe_main_room()
+        else:
+            decision = decide(['follow path', 'go back'], False)
+            match decision:
+                case 0:
+                    print(
+                        "You continue along the path, paved with cobblestones. You can feel the beating of your heart as \n"
+                        "people pass by you, but noone seems to think anything is out of the ordinary. It's been a while \n"
+                        "since you walked these streets, and the cobblestones feel rough and hard against your worn-down shoes\n"
+                        "compared to the dirt you normally walk on. You reach the bridge, and as you walk over it the water rushes \n"
+                        "beneath you, nearly but not quite covering the clattering of the planks of wood that make up the \n"
+                        "bridge. The spray brings welcome releaf from both the stuffy summer night and the rancid oder that \n"
+                        "seems to fill nearly all cities.")
+                    Graysoul.describe_nick()
+                case 1:
+                    print("You return to the smugglers' den.")
+                    SmugglersHideout.describe_main_room()
 
     @staticmethod
     def describe_nick():
@@ -129,8 +169,8 @@ class SmugglersHideout:
         print(f"\nDEBUG: {discoveredOptions}\n")
         if discoveredOptions['club']:
             print(
-                'While the club fits nicely in your hand, you could switch it out with the dagger if you wanted, or drop the \n'
-                'club back here. After all, you\'ve never needed a weapon before.')
+                "While the club fits nicely in your hand, you could switch it out with the dagger if you wanted, or drop the \n"
+                "club back here. After all, you\'ve never needed a weapon before.")
             decision = decide(['switch with dagger', 'leave club', 'go back'], False)
             match decision:
                 case 0:
@@ -149,9 +189,9 @@ class SmugglersHideout:
                     SmugglersHideout.describe_weapons_room()
         elif discoveredOptions['dagger']:
             print(
-                'While you already have a dagger, you know how to use the club better, and it can prove more useful in \n'
-                'covert operations. Maybe it would be a better pick for you. You could switch the dagger out for the club,\n'
-                'or you could leave the club back here. After all, you\'ve never needed a weapon before.')
+                "While you already have a dagger, you know how to use the club better, and it can prove more useful in \n"
+                "covert operations. Maybe it would be a better pick for you. You could switch the dagger out for the club,\n"
+                "or you could leave the club back here. After all, you\'ve never needed a weapon before.")
             decision = decide(['switch with club', 'leave dagger', 'go back'], False)
             match decision:
                 case 0:
@@ -197,7 +237,7 @@ class SmugglersHideout:
         if discoveredOptions['lock picks']:
             print(
                 'While the lock picks will work  on a simple lock, you could also take the key imprint device, or drop the \n'
-                'lock picks here. If you don\'t need them, they will just get in the way.')
+                "lock picks here. If you don\'t need them, they will just get in the way.")
             decision = decide(['take key imprint device', 'leave lock picks', 'go back'], False)
             match decision:
                 case 0:
@@ -216,10 +256,8 @@ class SmugglersHideout:
                 case 2:
                     SmugglersHideout.describe_weapons_room()
         elif discoveredOptions['key wax']:
-            print(
-                "The key wax is pretty slow, it might be useful to take the lock picks. Or you could just drop it off here \n"
-                "so as not to get in the way"
-                )
+            print("The key wax is pretty slow, it might be useful to take the lock picks. Or you could just drop it off here \n"
+                "so as not to get in the way")
             decision = decide(['take lock picks', 'leave key wax', 'go back'], False)
             match decision:
                 case 0:
