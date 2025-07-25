@@ -55,8 +55,6 @@ def victory_condition():
             SmugglersHideout.describe_main_room()
         case 1:
             print("Hope you had fun, and congratulations again!")
-
-    SmugglersHideout.describe_main_room()
 class Graysoul:
     @staticmethod
     def describe_outside_safehouse():
