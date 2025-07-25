@@ -1,3 +1,4 @@
+from pydoc import describe
 from typing import List, Optional
 
 
@@ -16,19 +17,40 @@ def decide(decisions: List[str], show_by_default: Optional[bool]):
     elif answer.lower().strip() in decisions:
         return decisions.index(answer.lower().strip())
     else:
-        print('Sorry, I didn\'t catch that, please try again')
+        print("Sorry, I didn't catch that, please try again")
         return decide(decisions, False)
 
 
 discoveredOptions: dict[str, bool] = {'guard change': False, 'club': False, 'dagger': False, 'lock picks': False,
-                                      'key wax': False}
+                                      'key wax': False, 'cards': False}
 
 
 class Graysoul:
     @staticmethod
     def describe_outside_safehouse():
-        print("You are going where noone has gone before. This path has not been implemented yet.")
-        SmugglersHideout.describe_main_room()
+        print("You find yourself on an old grimy ally, which you follow to the main road leading into the city. You know that\n"
+              "if you continue along this path you'll eventually get to the nick where Gurathen is being held. Are you ready to\n"
+              "try to get him out?")
+        if discoveredOptions['guard change']:
+            decision = decide(['follow path', 'wait until shift change','go back'],False)
+            match decision:
+                case 0:
+                    print("You continue along the path, paved with cobblestones. You can feel the beating of your heart as \n"
+                          "people pass by you, but noone seems to think anything is out of the ordinary. It's been a while \n"
+                          "since you walked these streets, and the cobblestones feel rough and hard against your worn-down shoes\n"
+                          "compared to the dirt you normally walk on. You reach the bridge, and as you walk over it the water rushes \n"
+                          "beneath you, nearly but not quite covering the clattering of the planks of wood that make up the \n"
+                          "bridge. The spray brings welcome releaf from both the stuffy summer night and the rancid oder that \n"
+                          "seems to fill nearly all cities.")
+                    Graysoul.describe_nick()
+                case 1:
+                    print("You decide to wait until the guard changes shift. How do you want to do that?")
+                    decide(['walk in the park','watch the river'])
+
+    @staticmethod
+    def describe_nick():
+        print("You walk where no man has walked before. This path hasn't been implemented yet")
+        Graysoul.describe_outside_safehouse()
 
 
 class SmugglersHideout:
@@ -47,20 +69,13 @@ class SmugglersHideout:
             "A map of the city decorates the far wall, with a few markings on it. There is a group of smugglers bringing \n"
             "in bags full of unknown goods, chatting while they do so. They shuffle through the front of an abandoned \n"
             "bar, into the back where the goods are kept")
-        match (decide(["inspect map", 'approach smugglers', 'enter back', 'leave hideout'], True)):
+        match (decide(["inspect map", 'enter back', 'leave hideout'], True)):
             case 0:
                 SmugglersHideout.inspect_map()
-            case 1:
-                SmugglersHideout.talk_to_smugglers()
             case 2:
                 SmugglersHideout.describe_back_hall()
             case 3:
                 Graysoul.describe_outside_safehouse()
-
-    @staticmethod
-    def talk_to_smugglers():
-        print("You are going where noone has gone before. This path has not been implemented yet.")
-        SmugglersHideout.describe_main_room()
 
     @staticmethod
     def inspect_map():
@@ -82,7 +97,7 @@ class SmugglersHideout:
             "You walk into the hallway that leads to the three main back rooms. The hall is yellowed and moldy, and a \n"
             "distinct smell permeates the entire premise, of alcohol, must, and smoke. The right hall leads to the storage \n"
             "area, where they store the goods they shuttle through the river Habat, and into the cities further south. \n"
-            "The left hall leads to the weapons and gear storage, where they store the tools of there trade. Most are rusted\n"
+            "The left hall leads to the weapons and gear storage, where they store the tools of their trade. Most are rusted\n"
             "as they rarely have to use any of them. The final room is the bunks, where you sleep.")
         decision = decide(["go to weapons", 'go to storage', 'go to bunks', 'go to main room'], True)
         match decision:
@@ -155,7 +170,7 @@ class SmugglersHideout:
                     SmugglersHideout.describe_weapons_room()
         else:
             print(
-                "A dozen or so weapons hang on a wooden rack that seems to have been jerry rigged from scraps of rotting wood. \n"
+                "A dozen or so weapons hang on a wooden rack that seems to have been jerry-built from scraps of rotting wood. \n"
                 "Most you don't know how to use, and they are all in disrepair, with spots of rust on some, and on others it \n"
                 "is difficult to tell the rust from the weapon itself. While you don't know how to use a bladed weapon, one \n"
                 "implement in particular catches your eye. A small club in the bottom right of the could offer you something \n"
@@ -243,14 +258,36 @@ class SmugglersHideout:
 
     @staticmethod
     def describe_storage_room():
-        print("You are going where noone has gone before. This path has not been implemented yet.")
+        print("A few sacks have been dropped into the relatively large room, clumped together as if they are huddling from \n"
+              "a storm. The room is mostly cached in dust, with the path between the entrance and corner more recently kicked up.\n"
+              "Out of the corner of your eye, you see a rat scuttle across the room and through a hole in the corner. It is \n"
+              "more silent here than most other places in the city, and one can, on the quieter nights, if they close their eyes,\n"
+              " almost imagine themselves in a forest. Spider webs cross ceiling. They had allotted the larger room for goods \n"
+              "in hope for more business that never came. There's nothing in here for you.")
         SmugglersHideout.describe_back_hall()
 
     @staticmethod
     def describe_bunk_room():
-        print("You are going where noone has gone before. This path has not been implemented yet.")
-        SmugglersHideout.describe_back_hall()
-
-
+        print("Three sets of bunk beds line the room, upon which yellowed mattresses are lain. Ratty quilts cover these, \n"
+              "but only two of them have pillows. In the middle of the room, on a short table, an old deck of cards sits, \n"
+              "which they play most nights. An oil lamp flickers on the table, but you quickly put it out; It's not good to \n"
+              "waste oil with the prices they're charging these days. You will have to figure out who left it on once you free \n"
+              "Gurathen")
+        decision = decide(['go to bed', 'take cards', 'go back'],False)
+        match decision:
+            case 0:
+                print("You reach your bunk, but aren't tired. You try to get to sleep anyway; the meager light coming under\n"
+                      "the door keeps you up. You are unable to go to sleep, despite your best efforts. It's been nearly an hour.")
+                SmugglersHideout.describe_bunk_room()
+            case 1:
+                if discoveredOptions['cards']:
+                    print("You've already taken the cards; they are no longer on the table. You only *have* one pair of cards.")
+                else:
+                    print("You slip the cards into your pocket; it's always good to have a deck of cards. Just hope the others \n"
+                      "don't find out")
+                    discoveredOptions['cards'] = True
+                SmugglersHideout.describe_bunk_room()
+            case 2:
+                SmugglersHideout.describe_back_hall()
 if __name__ == "__main__":
     SmugglersHideout.describe_main_room()
