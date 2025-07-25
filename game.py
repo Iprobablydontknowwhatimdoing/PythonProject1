@@ -358,9 +358,9 @@ class SmugglersHideout:
         match (decide(["inspect map", 'enter back', 'leave hideout'], True)):
             case 0:
                 SmugglersHideout.inspect_map()
-            case 2:
+            case 1:
                 SmugglersHideout.describe_back_hall()
-            case 3:
+            case 2:
                 Graysoul.describe_outside_safehouse()
 
     @staticmethod
