@@ -42,7 +42,7 @@ def failure_condition():
             SmugglersHideout.describe_main_room()
         case 1:
             print("\nO.K. Goodbye. Hope you had fun!")
-def victory_condition():
+def victory_condition(): #TODO: turn off lamp option
     print("You walk where no man has walked before. This path hasn't been implemented yet")
     print("Even though I haven't fleshed out this part, Congratulations! You beat the game! How does it feel?")
     print("Do you want to try again?")
@@ -62,17 +62,17 @@ def victory_condition():
 class Graysoul:
     @staticmethod
     def describe_outside_safehouse():
-        print("You find yourself on an old grimy ally, which you follow to the main road leading into the city. You know that\n"
+        print("You find yourself in an old grimy alley, which you follow to the main road leading into the city. You know that\n"#TODO: search for this path hasnt been implemented
               "if you continue along this path you'll eventually get to the jailhouse where Gurathen is being held. Are you ready to\n"
               "try to get him out?")
-        if discoveredOptions['guard change']:
+        if discoveredOptions['guard change']:#TODO: remove debug
             decision = decide(['follow path', 'wait until shift change','go back'],False)
             match decision:
                 case 0:
                     print("You continue along the path, paved with cobblestones. You can feel the beating of your heart as \n"
                           "people pass by you, but noone seems to think anything is out of the ordinary. It's been a while \n"
                           "since you walked these streets, and the cobblestones feel rough and hard against your worn-down shoes\n"
-                          "compared to the dirt you normally walk on. You reach the bridge, and as you walk over it the water rushes \n"
+                          "compared to the dirt you normalley walk on. You reach the bridge, and as you walk over it the water rushes \n"
                           "beneath you, nearly but not quite covering the clattering of the planks of wood that make up the \n"
                           "bridge. The spray brings welcome releaf from both the stuffy summer night and the rancid oder that \n"
                           "seems to fill nearly all cities.")
@@ -113,7 +113,7 @@ class Graysoul:
                         "You continue along the path, paved with cobblestones. You can feel the beating of your heart as \n"
                         "people pass by you, but noone seems to think anything is out of the ordinary. It's been a while \n"
                         "since you walked these streets, and the cobblestones feel rough and hard against your worn-down shoes\n"
-                        "compared to the dirt you normally walk on. You reach the bridge, and as you walk over it the water rushes \n"
+                        "compared to the dirt you normalley walk on. You reach the bridge, and as you walk over it the water rushes \n"
                         "beneath you, nearly but not quite covering the clattering of the planks of wood that make up the \n"
                         "bridge. The spray brings welcome releaf from both the stuffy summer night and the rancid oder that \n"
                         "seems to fill nearly all cities.")
@@ -335,7 +335,7 @@ class Graysoul:
               "looks like they rarely get visitors. The laughter of the guardsmen drifts in from the cracked door of the \n"
               "guard room. The guard change will be here soon and take up their attention for a while longer, but it's\n"
               "good to get a move on now. You pass the unused cells, each with a wooden bucket and a bed frame, though no \n"
-              "mattresses adorn them. Eventually you reach the cell Gurathen is being kept in; No less dirty, but at \n"
+              "mattresses adorn them. Eventualley you reach the cell Gurathen is being kept in; No less dirty, but at \n"
               "least the locks were kept less rusty due to more frequent use. Less carries a lot of weight in that sentence. \n")
 
 
@@ -543,7 +543,7 @@ class SmugglersHideout:
     @staticmethod
     def describe_storage_room():
         print("A few sacks have been dropped into the relatively large room, clumped together as if they are huddling from \n"
-              "a storm. The room is mostly cached in dust, with the path between the entrance and corner more recently kicked up.\n"
+              "a storm. The room is mostly caked in dust, with the path between the entrance and corner more recently kicked up.\n"
               "Out of the corner of your eye, you see a rat scuttle across the room and through a hole in the corner. It is \n"
               "more silent here than most other places in the city, and one can, on the quieter nights, if they close their eyes,\n"
               " almost imagine themselves in a forest. Spider webs cross ceiling. They had allotted the larger room for goods \n"
