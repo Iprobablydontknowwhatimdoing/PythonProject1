@@ -158,7 +158,6 @@ class Graysoul:
                                   "lock is relatively rustless. You think you could pretty easily open it, as though you haven't practiced particularly \n"
                                   "on this model, it is a much lest robust lock, as it seems the guards were relying on themselves being there to catch \n"
                                   "intruders.")
-                            failure_condition()
                             decision = decide(['use key imprint device','use lock picks','bust door open'], False)
                             match decision:
                                 case 0:
@@ -173,11 +172,158 @@ class Graysoul:
                                           "around the building, presumably on a normal circuit. As he rounds the building, he sees you.")
                                     if discoveredOptions['dagger'] or discoveredOptions['club']:
                                         if discoveredOptions['dagger'] and discoveredOptions['club']:
-                                            print("but before he attacks you, you have a split second to act. You could attack him with both daggers")
+                                            print("but before he attacks you, you have a split second to act. You could attack him with your dagger or your \n"
+                                                  "club, or you could just run and hope he isn't fast enough to catch you.")
+                                            decision = decide(['attack with club', 'attack with dagger', 'run'], False)
+                                            match decision:
+                                                case 0:
+                                                    print("You club him in the back of the head, and he falls to the ground. You knocked him out, but you didn't kill him \n"
+                                                          "You should move quickly before his fellow guards notice that he hasn't come back. You rush down the path the way you \n"
+                                                          "came, and manage to get out of the city before the guard catches you!")
+                                                    victory_condition()
+                                                case 1:
+                                                    print("You attack him with the dagger, aiming for the throat (hoping to silence him). But because of \n"
+                                                          "your ineptitude with the dagger, you slip and only hit him in the chest. He hits you with his baton \n"
+                                                          "in your second of shock, and knocks you out.")
+                                                    failure_condition()
+                                                case 2:
+                                                    print("You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
+                                                          "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
+                                                          "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
+                                                          "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                                    failure_condition()
+                                        if discoveredOptions['dagger']:
+                                            decision =  decide(['attack','run'],False)
+                                            match decision:
+                                                case 0:
+                                                    print(
+                                                        "You attack him with the dagger, aiming for the throat (hoping to silence him). But because of \n"
+                                                        "your ineptitude with the dagger, you slip and only hit him in the chest. He hits you with his baton \n"
+                                                        "in your second of shock, and knocks you out.")
+                                                    failure_condition()
+                                                case 1:
+                                                    print(
+                                                        "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
+                                                        "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
+                                                        "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
+                                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                                    failure_condition()
+                                        if discoveredOptions['club']:
+                                            decision = decide(['attack', 'run'], False)
+                                            match decision:
+                                                case 0:
+                                                    print(
+                                                        "You club him in the back of the head, and he falls to the ground. You knocked him out, but you didn't kill him \n"
+                                                        "You should move quickly before his fellow guards notice that he hasn't come back. You rush down the path the way you \n"
+                                                        "came, and manage to get out of the city before the guard catches you!")
+                                                    victory_condition()
+                                                case 1:
+                                                    print(
+                                                        "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
+                                                        "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
+                                                        "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
+                                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                                    failure_condition()
+                                        else:
+                                            print(
+                                                "You try to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
+                                                "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
+                                                "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
+                                                "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                            failure_condition()
+                if discoveredOptions['lock picks']:
+                    print(
+                        "You get out your lock picks, and smoothly pick the lock. You have enough experience practicing on this model \n"
+                        "it barely takes any time at all, and you slide the door open to enter the nick.")
+                    Graysoul.describe_inside_nick()
+                    print(
+                        "After you tell Gurathen to be quite with a finger to your lips, you kneel down to unlock his cell. You don't \n"
+                        "have as much experience with this lock,  so it would take longer than the key imprint device, but mercifully, this \n"
+                        "lock is relatively rustless. You think you could pretty easily open it, as though you haven't practiced particularly \n"
+                        "on this model, it is a much lest robust lock, as it seems the guards were relying on themselves being there to catch \n"
+                        "intruders.")
+                    print(
+                        "Your lock picks slide into place, and click the cell door opens. You gesture for Gurathen to \n"
+                        "leave the cell, and hurry to the back door. After you leave, though, you see a guard coming \n"
+                        "around the building, presumably on a normal circuit. As he rounds the building, he sees you.")
+                    if discoveredOptions['dagger'] or discoveredOptions['club']:
+                        if discoveredOptions['dagger'] and discoveredOptions['club']:
+                            print(
+                                "but before he attacks you, you have a split second to act. You could attack him with your dagger or your \n"
+                                "club, or you could just run and hope he isn't fast enough to catch you.")
+                            decision = decide(['attack with club', 'attack with dagger', 'run'], False)
+                            match decision:
+                                case 0:
+                                    print(
+                                        "You club him in the back of the head, and he falls to the ground. You knocked him out, but you didn't kill him \n"
+                                        "You should move quickly before his fellow guards notice that he hasn't come back. You rush down the path the way you \n"
+                                        "came, and manage to get out of the city before the guard catches you!")
+                                    victory_condition()
+                                case 1:
+                                    print(
+                                        "You attack him with the dagger, aiming for the throat (hoping to silence him). But because of \n"
+                                        "your ineptitude with the dagger, you slip and only hit him in the chest. He hits you with his baton \n"
+                                        "in your second of shock, and knocks you out.")
+                                    failure_condition()
+                                case 2:
+                                    print(
+                                        "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
+                                        "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
+                                        "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
+                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                    failure_condition()
+                        if discoveredOptions['dagger']:
+                            decision = decide(['attack', 'run'], False)
+                            match decision:
+                                case 0:
+                                    print(
+                                        "You attack him with the dagger, aiming for the throat (hoping to silence him). But because of \n"
+                                        "your ineptitude with the dagger, you slip and only hit him in the chest. He hits you with his baton \n"
+                                        "in your second of shock, and knocks you out.")
+                                    failure_condition()
+                                case 1:
+                                    print(
+                                        "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
+                                        "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
+                                        "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
+                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                    failure_condition()
+                        if discoveredOptions['club']:
+                            decision = decide(['attack', 'run'], False)
+                            match decision:
+                                case 0:
+                                    print(
+                                        "You club him in the back of the head, and he falls to the ground. You knocked him out, but you didn't kill him \n"
+                                        "You should move quickly before his fellow guards notice that he hasn't come back. You rush down the path the way you \n"
+                                        "came, and manage to get out of the city before the guard catches you!")
+                                    victory_condition()
+                                case 1:
+                                    print(
+                                        "You decide to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
+                                        "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
+                                        "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
+                                        "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                                    failure_condition()
+                        else:
+                            print(
+                                "You try to run away, and grab Gurathen, hauling him after you. You successfully make it to the safe house,\n"
+                                "but what you don't know is that you were being tracked. Just as you settle down at the table in the main room,\n"
+                                "a dozen guards and policemen shove through the door and arrest you and the rest of the smugglers, taking the goods \n"
+                                "and bringing you all to the nick. In the rush, you are separated from Gurathen and can't tell if he escaped.")
+                            failure_condition()
+        else:
+            print("As you approach the guardhouse you see the flickering lights of the nick, coming from a group inside \n"
+                  "who huddle around a table playing a game of cards. They don't have a straight view of the holding cells. \n"
+                  "You see a back door that you could sneak through, and avoid the guards at the front door. You'll have \n"
+                  "to be quick though; If you don't hurry, then the guards will throw you in too, so you hurry to the back. \n"
+                  "You approach the door, under which a feint warm light streams out. When you try to turn the handle, though, \n"
+                  "it doesn't budge; the door is locked. And just as you're doing that, a guard circles around the building. \n"
+                  "He calls out that someone is trying to get into the nick, and more guards come rushing towards you. You manage \n"
+                  "to run away, but the guards are on high alert the rest of the night, and you don't get another opportunity to \n"
+                  "free Gurathen. The next morning he is executed in the park. You can see the pain in your friend's eyes as \n"
+                  "he struggles for breath as he is hanged")
+            failure_condition()
 
-    @staticmethod
-    def run_from_guards():
-        failure_condition()
     @staticmethod
     def describe_inside_nick():
         print("The inside of the nick has grime and dust caching nearly every surface, making it hard to breath. The \n"
