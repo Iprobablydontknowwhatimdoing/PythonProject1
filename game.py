@@ -121,7 +121,7 @@ class Graysoul:
     @staticmethod
     def describe_nick(waited_shift: bool):
         print("The nick is surprisingly small; it doesn't even have a second floor. It doesn't have to, you suppose, \n"
-              "when execution is the punishment for every, even minor, infraction. It also makes your hob harder.")
+              "when execution is the punishment for every, even minor, infraction. It also makes your job harder.")
         if waited_shift:
             print("As you approach the guardhouse,")
 
