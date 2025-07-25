@@ -3,8 +3,10 @@ from typing import List, Optional
 # You walk where no man has walked before. This path hasn't been implemented yet
 
 def show_options(option_list: List[str]):
+    i = 0
     for string in option_list:
-        print(f' - {string}')
+        print(f' {i}. {string}')
+        i += 1
 
 
 def decide(decisions: List[str], show_by_default: Optional[bool]):
@@ -122,7 +124,7 @@ class Graysoul:
     @staticmethod
     def describe_nick(waited_shift: bool):
         print("The nick is surprisingly small; it doesn't even have a second floor. It doesn't have to, you suppose, \n"
-              "when execution is the punishment for every, even minor, infraction. It also makes your hob harder.")
+              "when execution is the punishment for every, even minor, infraction. It also makes your job harder.")
         if waited_shift:
             print("As you approach the guardhouse, sneaking just ahead of the shift change guards, you see the \n"
                   "flickering lights of the nick, coming from a group inside who huddle around a table playing a game \n"
